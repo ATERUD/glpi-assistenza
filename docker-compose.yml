@@ -31,10 +31,10 @@ services:
         ports:
             - "8280:80"
         volumes:
-            - ./data/glpi:/var/lib/glpi
-            - ./data/config:/etc/glpi
-            - ./data/plugins:/var/www/html/plugins
-            - ./data/marketplace:/var/www/html/marketplace
+            - ./data/glpi:/var/www/html/glpi/glpi/files
+            - ./data/config:/var/www/html/glpi/config
+            - ./data/plugins:/var/www/html/glpi/plugins
+            - ./data/marketplace:/var/www/html/glpi/marketplace
         networks:
           glpi:
             ipv4_address: 172.22.0.5
@@ -43,7 +43,7 @@ services:
           - VERSION_GLPI=11.0.11
     
     mysql-cron-backup:
-        container_name: glpi_database_cron_backup
+        container_name: glpi-database-cron-backup
         image: fradelg/mysql-cron-backup
         depends_on:
           database:
