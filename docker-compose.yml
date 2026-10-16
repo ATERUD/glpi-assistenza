@@ -14,13 +14,20 @@ services:
         networks:
           glpi:
             ipv4_address: 172.22.0.3
+        healthcheck:
+          test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+          start_period: 10s
+          interval: 10s
+          timeout: 5s
+          retries: 3
 
     glpi:
         image: diouxx/glpi:latest
         container_name: glpi
         restart: unless-stopped
         depends_on:
-            - mariadb
+          database:
+            condition: service_healthy
         ports:
             - "8280:80"
         volumes:
