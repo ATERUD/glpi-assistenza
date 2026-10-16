@@ -1,1 +1,6 @@
 .env
+data/config/*
+data/glpi/*
+data/plugins/*
+data/marketplace/*
+
