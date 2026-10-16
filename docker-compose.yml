@@ -3,6 +3,7 @@ services:
     database:
         image: mariadb:11
         container_name: glpi-database
+        mem_limit: 1g
         restart: unless-stopped
         environment:
             MYSQL_DATABASE: glpi
@@ -24,6 +25,7 @@ services:
     glpi:
         image: diouxx/glpi:latest
         container_name: glpi
+        mem_limit: 1g
         restart: unless-stopped
         depends_on:
           database:
@@ -52,6 +54,7 @@ services:
     glpi-test:
         image: diouxx/glpi:latest
         container_name: glpi-test
+        mem_limit: 512m 
         restart: unless-stopped
         depends_on:
           database:
@@ -78,6 +81,7 @@ services:
     mysql-cron-backup:
         container_name: glpi-database-cron-backup
         image: fradelg/mysql-cron-backup
+        mem_limit: 256m
         depends_on:
           database:
             condition: service_healthy
