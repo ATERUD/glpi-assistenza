@@ -41,7 +41,40 @@ services:
 
         environment:
           - VERSION_GLPI=11.0.11
-    
+   
+        healthcheck:
+          test: ["CMD", "curl", "-fsS", "http://localhost/index.php"]
+          interval: 30s
+          timeout: 10s
+          retries: 5
+          start_period: 60s 
+
+    glpi-test:
+        image: diouxx/glpi:latest
+        container_name: glpi-test
+        restart: unless-stopped
+        depends_on:
+          database:
+            condition: service_healthy
+        ports:
+            - "8290:80"
+        volumes:
+            - ./data-test/glpi:/var/www/html/glpi/glpi/files
+            - ./data-test/config:/var/www/html/glpi/config
+        networks:
+          glpi:
+            ipv4_address: 172.22.0.15
+
+        environment:
+          - VERSION_GLPI=11.0.11
+   
+        healthcheck:
+          test: ["CMD", "curl", "-fsS", "http://localhost/index.php"]
+          interval: 30s
+          timeout: 10s
+          retries: 5
+          start_period: 60s 
+
     mysql-cron-backup:
         container_name: glpi-database-cron-backup
         image: fradelg/mysql-cron-backup
