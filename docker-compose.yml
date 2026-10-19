@@ -43,7 +43,7 @@ services:
 
         environment:
           - VERSION_GLPI=11.0.11
-          - TZ=Europe/Rome 
+          - TIMEZONE=Europe/Rome 
         healthcheck:
           test: ["CMD", "curl", "-fsS", "http://localhost/index.php"]
           interval: 30s
@@ -70,7 +70,7 @@ services:
 
         environment:
           - VERSION_GLPI=11.0.11
-          - TZ=Europe/Rome 
+          - TIMEZONE=Europe/Rome 
   
         healthcheck:
           test: ["CMD", "curl", "-fsS", "http://localhost/index.php"]
