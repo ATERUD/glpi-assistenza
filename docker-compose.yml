@@ -11,7 +11,7 @@ services:
             MYSQL_PASSWORD: ${MYSQL_DB_PASSWORD}
             MYSQL_RANDOM_ROOT_PASSWORD: 'yes'
         volumes:
-            - ./data/mariadb:/var/lib/mysql
+          - ./data/mariadb:/var/lib/mysql
         networks:
           glpi:
             ipv4_address: 172.22.0.3
@@ -31,19 +31,19 @@ services:
           database:
             condition: service_healthy
         ports:
-            - "8280:80"
+          - "127.0.0.1:8280:80"
         volumes:
-            - ./data/glpi:/var/www/html/glpi/glpi/files
-            - ./data/config:/var/www/html/glpi/config
-            - ./data/plugins:/var/www/html/glpi/plugins
-            - ./data/marketplace:/var/www/html/glpi/marketplace
+          - ./data/glpi:/var/www/html/glpi/glpi/files
+          - ./data/config:/var/www/html/glpi/config
+          - ./data/plugins:/var/www/html/glpi/plugins
+          - ./data/marketplace:/var/www/html/glpi/marketplace
         networks:
           glpi:
             ipv4_address: 172.22.0.5
 
         environment:
           - VERSION_GLPI=11.0.11
-   
+          - TZ=Europe/Rome 
         healthcheck:
           test: ["CMD", "curl", "-fsS", "http://localhost/index.php"]
           interval: 30s
@@ -60,17 +60,18 @@ services:
           database:
             condition: service_healthy
         ports:
-            - "8290:80"
+          - "127.0.0.1:8290:80"
         volumes:
-            - ./data-test/glpi:/var/www/html/glpi/glpi/files
-            - ./data-test/config:/var/www/html/glpi/config
+          - ./data-test/glpi:/var/www/html/glpi/glpi/files
+          - ./data-test/config:/var/www/html/glpi/config
         networks:
           glpi:
             ipv4_address: 172.22.0.15
 
         environment:
           - VERSION_GLPI=11.0.11
-   
+          - TZ=Europe/Rome 
+  
         healthcheck:
           test: ["CMD", "curl", "-fsS", "http://localhost/index.php"]
           interval: 30s
