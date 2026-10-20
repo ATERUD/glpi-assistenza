@@ -33,7 +33,6 @@ services:
         ports:
           - "127.0.0.1:8280:80"
         volumes:
-          #- /etc/timezone/:/etc/timezone:ro
           - /etc/localtime:/etc/localtime:ro
           - ./data/glpi:/var/www/html/glpi/files
           - ./data/config:/var/www/html/glpi/config
@@ -46,6 +45,8 @@ services:
         environment:
           - VERSION_GLPI=11.0.11
           - TIMEZONE=Europe/Rome 
+          - TZ=Europe/Rome
+ 
         healthcheck:
           test: ["CMD", "curl", "-fsS", "http://localhost/index.php"]
           interval: 30s
@@ -64,7 +65,6 @@ services:
         ports:
           - "127.0.0.1:8290:80"
         volumes:
-          #- /etc/timezone/:/etc/timezone:ro
           - /etc/localtime:/etc/localtime:ro
           - ./data-test/glpi:/var/www/html/glpi/glpi/files
           - ./data-test/config:/var/www/html/glpi/config
@@ -75,6 +75,7 @@ services:
         environment:
           - VERSION_GLPI=11.0.11
           - TIMEZONE=Europe/Rome 
+          - TZ=Europe/Rome
   
         healthcheck:
           test: ["CMD", "curl", "-fsS", "http://localhost/index.php"]
