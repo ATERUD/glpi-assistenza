@@ -66,7 +66,7 @@ services:
           - "127.0.0.1:8290:80"
         volumes:
           - /etc/localtime:/etc/localtime:ro
-          - ./data-test/glpi:/var/www/html/glpi/glpi/files
+          - ./data-test/glpi:/var/www/html/glpi/files
           - ./data-test/config:/var/www/html/glpi/config
         networks:
           glpi:
