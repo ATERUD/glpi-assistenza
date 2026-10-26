@@ -55,7 +55,7 @@ services:
           start_period: 60s 
 
     glpi-test:
-        image: glpi/glpi:11.0.11
+        image: "glpi/glpi:11.0.11"
         container_name: glpi-test
         mem_limit: 512m 
         restart: unless-stopped
@@ -74,7 +74,7 @@ services:
             ipv4_address: 172.22.0.15
 
         environment:
-          - VERSION_GLPI=11.0.11
+          - GLPI_SKIP_AUTOINSTALL=true
           - TIMEZONE=Europe/Rome 
           - TZ=Europe/Rome
   
