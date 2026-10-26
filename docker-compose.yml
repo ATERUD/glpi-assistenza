@@ -55,7 +55,7 @@ services:
           start_period: 60s 
 
     glpi-test:
-        image: diouxx/glpi:latest
+        image: glpi/glpi:11.0.11
         container_name: glpi-test
         mem_limit: 512m 
         restart: unless-stopped
@@ -66,8 +66,9 @@ services:
           - "127.0.0.1:8290:80"
         volumes:
           - /etc/localtime:/etc/localtime:ro
-          - ./data-test/glpi:/var/www/html/glpi/files
-          - ./data-test/config:/var/www/html/glpi/config
+          - ./ldap.conf:/etc/ldap/ldap.conf:ro
+          - ./data-test/glpi:/var/glpi/files
+          - ./data-test/config:/var/glpi/config
         networks:
           glpi:
             ipv4_address: 172.22.0.15
