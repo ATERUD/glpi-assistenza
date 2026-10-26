@@ -23,7 +23,7 @@ services:
           retries: 3
 
     glpi:
-        image: diouxx/glpi:latest
+        image: "glpi/glpi:11.0.11"
         container_name: glpi
         mem_limit: 1g
         restart: unless-stopped
@@ -34,16 +34,17 @@ services:
           - "127.0.0.1:8280:80"
         volumes:
           - /etc/localtime:/etc/localtime:ro
-          - ./data/glpi:/var/www/html/glpi/files
-          - ./data/config:/var/www/html/glpi/config
-          - ./data/plugins:/var/www/html/glpi/plugins
-          - ./data/marketplace:/var/www/html/glpi/marketplace
+          - ./ldap.conf:/etc/ldap/ldap.conf:ro
+          - ./data/glpi:/var/glpi/files
+          - ./data/config:/var/glpi/config
+          - ./data/plugins:/var/www/glpi/plugins
+          - ./data/marketplace:/var/glpi/marketplace
         networks:
           glpi:
             ipv4_address: 172.22.0.5
 
         environment:
-          - VERSION_GLPI=11.0.11
+          - GLPI_SKIP_AUTOINSTALL=true
           - TIMEZONE=Europe/Rome 
           - TZ=Europe/Rome
  
