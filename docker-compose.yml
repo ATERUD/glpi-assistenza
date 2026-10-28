@@ -35,6 +35,7 @@ services:
         volumes:
           - /etc/localtime:/etc/localtime:ro
           - ./ldap.conf:/etc/ldap/ldap.conf:ro
+          - ./php-custom.ini:/usr/local/etc/php/conf.d/php-custom.ini:ro
           - ./data/glpi:/var/glpi/files
           - ./data/config:/var/glpi/config
           - ./data/plugins:/var/www/glpi/plugins
@@ -68,6 +69,7 @@ services:
         volumes:
           - /etc/localtime:/etc/localtime:ro
           - ./ldap.conf:/etc/ldap/ldap.conf:ro
+          - ./php-custom.ini:/usr/local/etc/php/conf.d/php-custom.ini:ro
           - ./data-test/glpi:/var/glpi/files
           - ./data-test/config:/var/glpi/config
         networks:
